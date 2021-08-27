@@ -4,7 +4,9 @@ import NotOK from '../../../assets/highlight_off_white_24dp.svg';
 import { Vermelho } from '../../../styles/cores';
 
 function BotaoNotOk(){
-    return <TouchableOpacity style={styles.container}><NotOK height='80%' width='80%'/></TouchableOpacity>
+    return <TouchableOpacity style={styles.container} activeOpacity={0.5}>
+        <NotOK height='80%' width='80%'/>
+    </TouchableOpacity>
 }
 const styles = StyleSheet.create({
     container: {

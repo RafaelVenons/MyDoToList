@@ -7,7 +7,7 @@ import BotaoOk from '../BotaoOk';
 
 function CardMeta(){
     return <View style={styles.container}>
-        <Lobster estilo={styles.texto}>Meta</Lobster>
+        <Lobster style={styles.texto}>Meta</Lobster>
         <View style={styles.containerBotoes}>
             <BotaoNotOk/>
             <BotaoOk/>
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         backgroundColor: Laranja,
         borderRadius: 16,
+        elevation: 4
     },
     texto: {
         flex: 1,

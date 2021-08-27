@@ -10,29 +10,30 @@ import { Azul, Branco, Laranja } from "../../styles/cores";
 import EstatisticasSVG from "../../assets/equalizer_white_24dp.svg";
 import HomeSVG from "../../assets/home_white_24dp.svg";
 import NovaAtividadeSVG from "../../assets/add_circle_white_24dp.svg";
+import Cabecalho from "../Cabecalho";
 
 function Navegacao({ page, setPage }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.botao} onPress={() => setPage("Estatisticas")}>
+      <TouchableOpacity style={styles.botao} onPress={() => setPage("Estatisticas")} activeOpacity={0.5}>
         <EstatisticasSVG
-          height="50%"
-          width="50%"
+          height="100%"
+          width="100%"
           fill={page === "Estatisticas" ? Laranja : Branco}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => setPage("Home")}>
+      <TouchableOpacity style={styles.botao} onPress={() => setPage("Home")} activeOpacity={0.5}>
         <HomeSVG
-          height="50%"
-          width="50%"
+          height="100%"
+          width="100%"
           fill={page === "Home" ? Laranja : Branco}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => setPage("NovaAtividade")}>
+      <TouchableOpacity style={styles.botao} onPress={() => setPage("NovaAtividade")} activeOpacity={0.5}>
         <NovaAtividadeSVG
-          height="50%"
-          width="50%"
+          height="100%"
+          width="100%"
           fill={page === "NovaAtividade" ? Laranja : Branco}
         />
       </TouchableOpacity>
@@ -51,9 +52,11 @@ const styles = StyleSheet.create({
     top: Dimensions.get("window").height - 60,
     borderTopEndRadius: 16,
     borderTopStartRadius: 16,
+    elevation: 4
   },
   botao: {
-    paddingTop: 24,
+    paddingBottom: 66,
+    paddingTop: 12,
     alignItems: 'center',
     flex: 1
   }

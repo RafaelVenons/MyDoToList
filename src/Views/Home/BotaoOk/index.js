@@ -4,7 +4,9 @@ import OK from '../../../assets/task_alt_white_24dp.svg';
 import { Verde } from '../../../styles/cores';
 
 function BotaoOk(){
-    return <TouchableOpacity style={styles.container}><OK height='80%' width='80%'/></TouchableOpacity>
+    return <TouchableOpacity style={styles.container} activeOpacity={0.5}>
+        <OK height='80%' width='80%'/>
+    </TouchableOpacity>
 }
 const styles = StyleSheet.create({
     container: {

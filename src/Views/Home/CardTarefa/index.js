@@ -7,7 +7,7 @@ import BotaoOk from '../BotaoOk';
 
 function CardTarefa(){
     return <View style={styles.container}>
-        <Lobster estilo={styles.texto}>Task</Lobster>
+        <Lobster style={styles.texto}>Task</Lobster>
         <BotaoOk/>
     </View>
 }
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         backgroundColor: Laranja,
         borderRadius: 16,
+        elevation: 4
     },
     texto: {
         flex: 1,
