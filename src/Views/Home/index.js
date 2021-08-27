@@ -1,12 +1,16 @@
 import React from 'react';
 import Titulo from '../../componets/Titulo';
-import Card from './Card';
+import CardTarefa from './CardTarefa';
+import CardMeta from './CardMeta';
+import { StyleSheet, Dimensions, View } from 'react-native';
 
 function Home(){
-    return <>
+    return <View>
     <Titulo>Tarefas</Titulo>
-    <Card/>
-    </>
+    <CardTarefa/>
+    <Titulo>Metas</Titulo>
+    <CardMeta/>
+    </View>
 }
 
 export default Home;

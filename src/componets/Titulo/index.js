@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         marginTop: -66
     },
     texto: {
-        padding: 16,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
         backgroundColor: Branco,
         fontSize: 24,
         color: Font_Azul

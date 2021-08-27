@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: Azul,
         borderBottomEndRadius: 16,
-        borderBottomStartRadius: 16
+        borderBottomStartRadius: 16,
+        top: 0
     },
     imagem: {
         resizeMode: 'center',
