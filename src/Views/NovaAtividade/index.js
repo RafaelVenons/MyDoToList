@@ -1,18 +1,35 @@
 import React, { useState } from "react";
-import { StyleSheet, Switch, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Switch, View } from "react-native";
 import { Azul_Claro, Azul_Escuro } from "../../styles/cores";
 import Atalho from "./Atalho";
 import EntradaText from "./EntradaTexto";
+import Enviar from "./Enviar";
+import Frequencia from "./Frequencia";
 
 function NovaAtividade() {
-  const [nome, setNome] = useState("");
   const [toggle, setToggle] = useState(false);
   const toggleSwitch = () => setToggle((previousState) => !previousState);
   const toggleMeta = () => setToggle(false);
   const toggleTarefa = () => setToggle(true);
 
+  const [nome, setNome] = useState("");
+  const [nomeValida, setNomeValida] = useState(true);
+  const [dias, setDias] = useState([
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+  ]);
+  const [freqValida, setFreqValida] = useState(true);
+  const [desc, setDesc] = useState("");
+
   return (
-    <View>
+    <KeyboardAvoidingView 
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
       <View style={styles.containerSelecao}>
         <Atalho texto="Meta" action={toggleMeta} ativo={!toggle} />
         <Switch
@@ -23,9 +40,32 @@ function NovaAtividade() {
         />
         <Atalho texto="Tarefa" action={toggleTarefa} ativo={toggle} />
       </View>
-        <EntradaText style={styles.input} titulo={toggle ? 'Nome da Tarefa' : 'Nome da Meta'} value={nome} onChangeText={setNome}/>
-        <EntradaText style={styles.input} titulo='Descrição' multiline value={nome} onChangeText={setNome}/>
-    </View>
+      <EntradaText
+        style={styles.input}
+        titulo={toggle ? "Nome da Tarefa" : "Nome da Meta"}
+        value={nome}
+        onChangeText={setNome}
+        valido={nomeValida}
+        validacao={setNomeValida}
+      />
+      {!toggle && <Frequencia
+        style={styles.input}
+        dias={dias}
+        setDias={setDias}
+        valido={freqValida}
+        validacao={setFreqValida}
+      />}
+      <EntradaText
+        style={styles.input}
+        titulo="Descrição"
+        multiline
+        value={desc}
+        onChangeText={setDesc}
+      />
+      <Enviar style={styles.input} valido={(nome !== "")&&(freqValida || toggle)}>
+        {toggle ? 'Criar Tarefa' : 'Criar Meta'}
+      </Enviar>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -40,8 +80,8 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   input: {
-    marginHorizontal: 16
-  }
+    marginHorizontal: 16,
+  },
 });
 
 export default NovaAtividade;
