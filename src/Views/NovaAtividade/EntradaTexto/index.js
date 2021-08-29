@@ -59,7 +59,6 @@ const dinamicStyles = (valido) => StyleSheet.create({
   },
   containerTexto: {
     marginTop: -14,
-    marginLeft: 8,
     justifyContent: "center",
     alignItems: "flex-start",
   },
