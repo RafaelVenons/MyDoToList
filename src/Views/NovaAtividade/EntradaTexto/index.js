@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 import Lobster from "../../../componets/Lobster";
-import { Azul, Azul_Escuro, Branco, Vermelho } from "../../../styles/cores";
+import { Azul, Azul_Escuro, Branco, Vermelho, Vermelho_Claro } from "../../../styles/cores";
 
 function EntradaText({
   titulo,
@@ -52,7 +52,7 @@ const dinamicStyles = (valido) => StyleSheet.create({
   container: {
     borderWidth: 2,
     borderRadius: 16,
-    borderColor: valido ? Azul : Vermelho,
+    borderColor: valido ? Azul : Vermelho_Claro,
     paddingBottom: 8,
     paddingHorizontal: 16,
     marginTop: 12,
@@ -67,7 +67,7 @@ const dinamicStyles = (valido) => StyleSheet.create({
     paddingHorizontal: 8,
     fontSize: 18,
     backgroundColor: Branco,
-    color: valido ? Azul_Escuro : Vermelho,
+    color: valido ? Azul_Escuro : Vermelho_Claro,
   },
   input: {
     fontSize: 16,

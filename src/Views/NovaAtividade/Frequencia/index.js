@@ -5,7 +5,7 @@ import {
   Azul,
   Azul_Escuro,
   Branco,
-  Vermelho,
+  Vermelho_Claro,
 } from "../../../styles/cores";
 import Botao from "../Botao";
 
@@ -40,7 +40,7 @@ const dinamicStyles = (valido) =>
     container: {
       borderWidth: 2,
       borderRadius: 16,
-      borderColor: valido ? Azul : Vermelho,
+      borderColor: valido ? Azul : Vermelho_Claro,
       paddingBottom: 8,
       paddingHorizontal: 8,
       marginTop: 12,
@@ -55,7 +55,7 @@ const dinamicStyles = (valido) =>
       paddingHorizontal: 8,
       fontSize: 18,
       backgroundColor: Branco,
-      color: valido ? Azul_Escuro : Vermelho,
+      color: valido ? Azul_Escuro : Vermelho_Claro,
     },
     botoes: {
       justifyContent: "space-between",

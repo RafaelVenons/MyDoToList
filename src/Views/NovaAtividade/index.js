@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView, StyleSheet, Switch, View } from "react-native";
-import { Azul_Claro, Azul_Escuro } from "../../styles/cores";
-import Atalho from "./Atalho";
 import EntradaText from "./EntradaTexto";
 import Enviar from "./Enviar";
 import Frequencia from "./Frequencia";
+import Selecao from "./Selecao";
 
 function NovaAtividade() {
   const [toggle, setToggle] = useState(false);
-  const toggleSwitch = () => setToggle((previousState) => !previousState);
-  const toggleMeta = () => setToggle(false);
-  const toggleTarefa = () => setToggle(true);
-
   const [nome, setNome] = useState("");
   const [nomeValida, setNomeValida] = useState(true);
   const [dias, setDias] = useState([
@@ -30,16 +25,7 @@ function NovaAtividade() {
     <KeyboardAvoidingView 
       behavior={Platform.OS == "ios" ? "padding" : "height"}
       >
-      <View style={styles.containerSelecao}>
-        <Atalho texto="Meta" action={toggleMeta} ativo={!toggle} />
-        <Switch
-          trackColor={{ false: Azul_Claro, true: Azul_Claro }}
-          thumbColor={Azul_Escuro}
-          onValueChange={toggleSwitch}
-          value={toggle}
-        />
-        <Atalho texto="Tarefa" action={toggleTarefa} ativo={toggle} />
-      </View>
+      <Selecao toggle={toggle} setToggle={setToggle}/>
       <EntradaText
         style={styles.input}
         titulo={toggle ? "Nome da Tarefa" : "Nome da Meta"}
@@ -70,15 +56,6 @@ function NovaAtividade() {
 }
 
 const styles = StyleSheet.create({
-  containerSelecao: {
-    marginTop: 16,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  switch: {
-    padding: 8,
-  },
   input: {
     marginHorizontal: 16,
   },

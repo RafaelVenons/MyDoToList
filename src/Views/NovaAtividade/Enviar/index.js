@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Lobster from "../../../componets/Lobster";
-import { Azul, Azul_Claro, Branco } from "../../../styles/cores";
+import { Azul, Azul_Claro, Branco, Laranja, Laranja_Claro } from "../../../styles/cores";
 
 function Enviar({ children, valido, style }) {
   const styles = dinamicStyles(valido);
@@ -15,7 +15,7 @@ function Enviar({ children, valido, style }) {
 const dinamicStyles = (valido) =>
   StyleSheet.create({
     container: {
-      backgroundColor: valido ? Azul : Azul_Claro,
+      backgroundColor: valido ? Laranja : Laranja_Claro,
       borderRadius: 16,
       height: 56,
       marginTop: 16,
