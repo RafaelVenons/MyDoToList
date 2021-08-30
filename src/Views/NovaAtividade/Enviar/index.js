@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Lobster from "../../../componets/Lobster";
-import { Azul, Azul_Claro, Branco, Laranja, Laranja_Claro } from "../../../styles/cores";
+import { Branco, Laranja, Laranja_Claro } from "../../../styles/cores";
 
-function Enviar({ children, valido, style }) {
+function Enviar({ children, Adiciona, valido, style }) {
   const styles = dinamicStyles(valido);
+
   return (
-    <TouchableOpacity style={[styles.container, style]} activeOpacity={0.5}>
+    <TouchableOpacity style={[styles.container, style]} activeOpacity={0.5} onPress={Adiciona}>
       <Lobster style={styles.texto}>{children}</Lobster>
     </TouchableOpacity>
   );
@@ -20,7 +21,8 @@ const dinamicStyles = (valido) =>
       height: 56,
       marginTop: 16,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      elevation: valido ? 4 : 0
     },
     texto: {
         color: Branco,

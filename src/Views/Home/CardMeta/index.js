@@ -1,46 +1,27 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Lobster from '../../../componets/Lobster';
-import { Branco, Laranja } from '../../../styles/cores';
-import BotaoNotOk from '../BotaoNotOk';
-import BotaoOk from '../BotaoOk';
+import React, { useContext } from 'react';
+import Atividades from '../../../componets/contexct';
+import CardLayout from '../CardLayout';
 
-function CardMeta(){
-    return <View style={styles.container}>
-        <Lobster style={styles.texto}>Meta</Lobster>
-        <View style={styles.containerBotoes}>
-            <BotaoNotOk/>
-            <BotaoOk/>
-        </View>
-    </View>
-}
+function CardMeta({ nome, dias, desc, feito, id}){
+    const { metas, setMetas } = useContext(Atividades);
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 56,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        marginHorizontal: 32,
-        marginBottom: 16,
-        backgroundColor: Laranja,
-        borderRadius: 16,
-        elevation: 4
-    },
-    texto: {
-        flex: 1,
-        paddingTop: 8,
-        fontSize: 24,
-        color: Branco
-    },
-    containerBotoes: {
-        flexDirection: 'row',
-        margin: 0,
-        padding: 0,
-        justifyContent: 'space-between',
-        width: 88
+    const acaoOk = () => {
+        const i = metas.findIndex((item) => item.id === id);
+        let aux = metas;
+        const tam = aux[i].feito.length-1;
+        aux[i].feito[tam] = true;
+        setMetas([...aux])
     }
-})
+
+    const acaoNotOk = () => {
+        const i = metas.findIndex((item) => item.id === id);
+        let aux = metas;
+        const tam = aux[i].feito.length-1;
+        aux[i].feito[tam] = false;
+        setMetas([...aux])
+    }
+
+    return <CardLayout nome={nome} desc={desc} feito={feito[feito.length-1]} acaoOk={acaoOk} acaoNotOk={acaoNotOk} meta/>
+}
 
 export default CardMeta;

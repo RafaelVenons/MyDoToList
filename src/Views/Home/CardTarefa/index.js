@@ -1,43 +1,18 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Lobster from '../../../componets/Lobster';
-import { Branco, Laranja } from '../../../styles/cores';
-import BotaoNotOk from '../BotaoNotOk';
-import BotaoOk from '../BotaoOk';
+import React, { useContext } from 'react';
+import Atividades from '../../../componets/contexct';
+import CardLayout from '../CardLayout';
 
-function CardTarefa(){
-    return <View style={styles.container}>
-        <Lobster style={styles.texto}>Task</Lobster>
-        <BotaoOk/>
-    </View>
-}
+function CardTarefa({ nome, desc, feito, id}){
+    const { tarefas, setTarefas } = useContext(Atividades);
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 56,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        marginHorizontal: 32,
-        marginBottom: 16,
-        backgroundColor: Laranja,
-        borderRadius: 16,
-        elevation: 4
-    },
-    texto: {
-        flex: 1,
-        paddingTop: 8,
-        fontSize: 24,
-        color: Branco
-    },
-    containerBotoes: {
-        flexDirection: 'row',
-        margin: 0,
-        padding: 0,
-        justifyContent: 'space-between',
-        width: 96
+    const acaoOk = () => {
+        const i = tarefas.findIndex((item) => item.id === id);
+        let aux = tarefas;
+        aux[i].feito = true;
+        setTarefas([...aux])
     }
-})
+
+    return <CardLayout nome={nome} desc={desc} feito={feito} acaoOk={acaoOk}/>
+}
 
 export default CardTarefa;
