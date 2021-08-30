@@ -9,11 +9,10 @@ function Home() {
   const { tarefas, metas } = useContext(Atividades);
   return (
     <ScrollView style={styles.container}>
-      <Titulo>Tarefas</Titulo>
+      {tarefas.filter(item => !item.feito).length !== 0 && <Titulo>Tarefas</Titulo>}
         {tarefas.filter(item => !item.feito).map((item) => <CardTarefa key={item.id} {...item}/>)}
         <Titulo>Metas</Titulo>
-        {metas.filter(item => !item.feito[item.feito.length-1]).map((item) => <CardMeta  key={item.id} {...item}/>)}
-        {metas.filter(item => item.feito[item.feito.length-1]).map((item) => <CardMeta  key={item.id} {...item}/>)}
+        {metas.map((item) => <CardMeta  key={item.id} {...item}/>)}
     </ScrollView>
   );
 }

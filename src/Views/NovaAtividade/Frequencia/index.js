@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import Lobster from "../../../componets/Lobster";
 import {
@@ -10,9 +10,8 @@ import {
 import Botao from "../Botao";
 
 function Frequencia({ style, valido, validacao, dias, setDias }) {
-  let styles = dinamicStyles(valido);
-  const lista = ["D", "S", "T ", "Q", "Q", "S", "S"];
-
+  const styles = dinamicStyles(valido);
+  const semana = [" D ", " S ", " T  ", " Q ", " Q ", " S ", " S "];
   useEffect(() => {
     validacao(dias.reduce((item, acumulado) => item||acumulado, false));
   },[dias]);
@@ -23,7 +22,7 @@ function Frequencia({ style, valido, validacao, dias, setDias }) {
         <Lobster style={styles.title}>Frequencia</Lobster>
       </View>
       <View style={styles.botoes}>
-        {lista.map((item, i) => {
+        {semana.map((item, i) => {
           return (
             <Botao key={i} i={i} dias={dias} setDias={setDias}>
               {item}
@@ -38,8 +37,9 @@ function Frequencia({ style, valido, validacao, dias, setDias }) {
 const dinamicStyles = (valido) =>
   StyleSheet.create({
     container: {
+      height: 56,
       borderWidth: 2,
-      borderRadius: 16,
+      borderRadius: 28,
       borderColor: valido ? Azul : Vermelho_Claro,
       paddingBottom: 8,
       paddingHorizontal: 8,

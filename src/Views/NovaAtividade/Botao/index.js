@@ -20,17 +20,20 @@ function Botao({ children, i, dias, setDias }) {
 const dinamicStyles = (ativo) =>
   StyleSheet.create({
     botao: {
+      marginTop: -7,
       justifyContent: "center",
       alignItems: "center",
       height: 40,
       width: 40,
       backgroundColor: ativo ? Verde : Vermelho,
-      borderRadius: 8,
+      borderRadius: 20,
     },
     texto: {
       fontSize: 24,
       color: Branco,
       paddingTop: 6,
+      textShadowColor: '#000000',
+      textShadowRadius: 8,
     },
   });
 

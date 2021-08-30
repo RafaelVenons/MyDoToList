@@ -3,14 +3,12 @@ import {
   StyleSheet,
   Dimensions,
   View,
-  Text,
   TouchableOpacity,
 } from "react-native";
 import { Azul, Branco, Laranja } from "../../styles/cores";
 import EstatisticasSVG from "../../assets/equalizer_white_24dp.svg";
 import HomeSVG from "../../assets/home_white_24dp.svg";
 import NovaAtividadeSVG from "../../assets/add_circle_white_24dp.svg";
-import Cabecalho from "../Cabecalho";
 
 function Navegacao({ page, setPage }) {
 
@@ -50,8 +48,8 @@ const styles = StyleSheet.create({
     backgroundColor: Azul,
     position: "absolute",
     top: Dimensions.get("window").height - 60,
-    borderTopEndRadius: 16,
-    borderTopStartRadius: 16,
+    borderTopEndRadius: 28,
+    borderTopStartRadius: 28,
     elevation: 4
   },
   botao: {

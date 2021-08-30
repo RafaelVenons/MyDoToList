@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
         height: 187,
         width: '100%',
         backgroundColor: Azul,
-        borderBottomEndRadius: 16,
-        borderBottomStartRadius: 16,
+        borderBottomEndRadius: 28,
+        borderBottomStartRadius: 28,
         elevation: 4
     },
     imagem: {

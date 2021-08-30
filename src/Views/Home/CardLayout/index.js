@@ -3,20 +3,22 @@ import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Lobster from "../../../componets/Lobster";
 import {
+  Azul_Escuro,
   Branco,
   Laranja,
+  Laranja_Claro,
 } from "../../../styles/cores";
 import BotaoNotOk from "../BotaoNotOk";
 import BotaoOk from "../BotaoOk";
 
-function CardLayout({nome, desc, feito, meta, acaoOk, acaoNotOk}) {
+function CardLayout({nome, desc, feito, meta, acao}) {
   const [espandir, setEspandir] = useState(false);
   return (
     <LinearGradient
       style={styles.container}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      colors={[feito ? "#28F700" : "#FD0018", '#FF8E00', Laranja]}
+      colors={[ meta ? (feito ? "#28F700" : "#FD0018") : Laranja_Claro, Laranja, Laranja]}
     >
       <View style={styles.info}>
         <TouchableOpacity
@@ -26,13 +28,10 @@ function CardLayout({nome, desc, feito, meta, acaoOk, acaoNotOk}) {
         >
           <Lobster style={styles.texto}>{nome}</Lobster>
         </TouchableOpacity>
-        {meta ? (
-          <View style={styles.containerBotoes}>
-            <BotaoNotOk acao={acaoNotOk}/>
-            <BotaoOk acao={acaoOk} />
-          </View>
+        {meta && !feito ? (
+          <BotaoNotOk acao={acao}/>
         ) : (
-          <BotaoOk acao={acaoOk} />
+          <BotaoOk acao={acao} />
         )}
       </View>
       {espandir && <Text style={styles.textoDesc}>{desc}</Text>}
@@ -43,11 +42,10 @@ function CardLayout({nome, desc, feito, meta, acaoOk, acaoNotOk}) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    padding: 8,
     marginHorizontal: 32,
     marginBottom: 16,
-    borderRadius: 16,
+    borderRadius: 28,
     elevation: 4,
   },
   info: {
@@ -58,19 +56,18 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 24,
+    paddingTop: 4,
+    paddingLeft: 8,
     color: Branco,
-  },
-  containerBotoes: {
-    flexDirection: "row",
-    margin: 0,
-    padding: 0,
-    justifyContent: "space-between",
-    width: 88,
+    textShadowColor: '#000000',
+    textShadowRadius: 8,
   },
   textoDesc: {
     fontSize: 18,
     fontWeight: "700",
-    color: Branco
+    color: Branco,
+    textShadowColor: '#000000',
+    textShadowRadius: 4,
   },
 });
 

@@ -5,23 +5,15 @@ import CardLayout from '../CardLayout';
 function CardMeta({ nome, dias, desc, feito, id}){
     const { metas, setMetas } = useContext(Atividades);
 
-    const acaoOk = () => {
+    const acao = () => {
         const i = metas.findIndex((item) => item.id === id);
         let aux = metas;
         const tam = aux[i].feito.length-1;
-        aux[i].feito[tam] = true;
+        aux[i].feito[tam] = !aux[i].feito[tam];
         setMetas([...aux])
     }
 
-    const acaoNotOk = () => {
-        const i = metas.findIndex((item) => item.id === id);
-        let aux = metas;
-        const tam = aux[i].feito.length-1;
-        aux[i].feito[tam] = false;
-        setMetas([...aux])
-    }
-
-    return <CardLayout nome={nome} desc={desc} feito={feito[feito.length-1]} acaoOk={acaoOk} acaoNotOk={acaoNotOk} meta/>
+    return <CardLayout nome={nome} desc={desc} feito={feito[feito.length-1]} acao={acao} meta/>
 }
 
 export default CardMeta;

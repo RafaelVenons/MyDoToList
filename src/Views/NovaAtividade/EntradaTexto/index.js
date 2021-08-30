@@ -51,7 +51,7 @@ function EntradaText({
 const dinamicStyles = (valido) => StyleSheet.create({
   container: {
     borderWidth: 2,
-    borderRadius: 16,
+    borderRadius: 28,
     borderColor: valido ? Azul : Vermelho_Claro,
     paddingBottom: 8,
     paddingHorizontal: 16,

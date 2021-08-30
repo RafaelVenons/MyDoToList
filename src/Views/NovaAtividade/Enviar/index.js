@@ -17,7 +17,7 @@ const dinamicStyles = (valido) =>
   StyleSheet.create({
     container: {
       backgroundColor: valido ? Laranja : Laranja_Claro,
-      borderRadius: 16,
+      borderRadius: 28,
       height: 56,
       marginTop: 16,
       justifyContent: 'center',
