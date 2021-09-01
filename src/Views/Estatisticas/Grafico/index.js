@@ -99,15 +99,15 @@ const dinamicStyle = (largura) =>
     porcentagem: {
       fontSize: 36,
       color: Branco,
-      marginTop: (-largura * 5) / 7,
+      marginTop: -largura *.7,
       textShadowColor: "#0000FF",
-      textShadowRadius: 12,
+      textShadowRadius: 16,
     },
     info: {
       fontSize: 24,
       color: Branco,
       textShadowColor: "#0000FF",
-      textShadowRadius: 12,
+      textShadowRadius: 16,
     },
   });
 

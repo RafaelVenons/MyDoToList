@@ -2,39 +2,43 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Lobster from "../../../componets/Lobster";
-import {
-  Azul_Escuro,
-  Branco,
-  Laranja,
-  Laranja_Claro,
-} from "../../../styles/cores";
+import { Branco, Laranja, Laranja_Claro } from "../../../styles/cores";
 import BotaoNotOk from "../BotaoNotOk";
 import BotaoOk from "../BotaoOk";
+import BotaoDelete from "../BotaoDelete";
 
-function CardLayout({nome, desc, feito, meta, acao}) {
+function CardLayout({ nome, desc, feito, meta, acao, deletar }) {
   const [espandir, setEspandir] = useState(false);
   return (
     <LinearGradient
       style={styles.container}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      colors={[ meta ? (feito ? "#28F700" : "#FD0018") : Laranja_Claro, Laranja, Laranja]}
+      colors={[
+        meta ? (feito ? "#28F700" : "#FD0018") : Laranja_Claro,
+        Laranja,
+        Laranja,
+      ]}
     >
       <View style={styles.info}>
         <TouchableOpacity
           style={styles.areaPress}
           activeOpacity={0.5}
-          onPress={() => desc ? setEspandir(!espandir) : null}
+          onPress={() => setEspandir(!espandir)}
         >
-          <Lobster style={styles.texto}>{nome}</Lobster>
+          <Lobster style={styles.texto}> {nome} </Lobster>
         </TouchableOpacity>
-        {meta && !feito ? (
-          <BotaoNotOk acao={acao}/>
-        ) : (
-          <BotaoOk acao={acao} />
-        )}
+        {meta && !feito ? <BotaoNotOk acao={acao} /> : <BotaoOk acao={acao} />}
       </View>
-      {espandir && <Text style={styles.textoDesc}>{desc}</Text>}
+      {espandir &&
+        (desc ? (
+          <View style={styles.containerExpand}>
+            <Text style={styles.textoDesc}> {desc} </Text>
+            <BotaoDelete meta={meta} acao={deletar} />
+          </View>
+        ) : (
+          <BotaoDelete meta={meta} acao={deletar} />
+        ))}
     </LinearGradient>
   );
 }
@@ -59,15 +63,20 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingLeft: 8,
     color: Branco,
-    textShadowColor: '#000000',
-    textShadowRadius: 8,
+    textShadowColor: "#000000",
+    textShadowRadius: 16,
+  },
+  containerExpand: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   textoDesc: {
     fontSize: 18,
     fontWeight: "700",
     color: Branco,
-    textShadowColor: '#000000',
-    textShadowRadius: 4,
+    textShadowColor: "#000000",
+    textShadowRadius: 16,
   },
 });
 

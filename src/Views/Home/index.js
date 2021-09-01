@@ -4,15 +4,17 @@ import CardTarefa from "./CardTarefa";
 import CardMeta from "./CardMeta";
 import { StyleSheet, ScrollView, Dimensions } from "react-native";
 import Atividades from "../../componets/contexct";
+import moment from "moment";
 
 function Home() {
   const { tarefas, metas } = useContext(Atividades);
+  const dayWeek = moment().day();
   return (
     <ScrollView style={styles.container}>
       {tarefas.filter(item => !item.feito).length !== 0 && <Titulo>Tarefas</Titulo>}
         {tarefas.filter(item => !item.feito).map((item) => <CardTarefa key={item.id} {...item}/>)}
         <Titulo>Metas</Titulo>
-        {metas.map((item) => <CardMeta  key={item.id} {...item}/>)}
+        {metas.filter(item => item.dias[dayWeek]).map((item) => <CardMeta  key={item.id} {...item}/>)}
     </ScrollView>
   );
 }
