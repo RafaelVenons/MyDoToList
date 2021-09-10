@@ -4,6 +4,7 @@ export const Azul_Claro = '#95D3FB';
 
 export const Laranja = '#FFA533';
 export const Laranja_Claro = '#FFCE91';
+export const Laranja_Opaco = 'rgba(255, 206, 91, 0.5)';
 
 export const Vermelho = '#FE3353';
 export const Vermelho_Claro = '#FE5F78';

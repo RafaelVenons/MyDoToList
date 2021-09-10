@@ -1,119 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, View } from "react-native";
-import Cabecalho from "./src/componets/Cabecalho";
-import Home from "./src/Views/Home";
-import Estatisticas from "./src/Views/Estatisticas";
-import NovaAtividade from "./src/Views/NovaAtividade";
-import Navegacao from "./src/componets/Navegacao";
-import Atividades from "./src/componets/contexct";
-import moment from "moment";
+import React, { useState } from "react";
+import AppLoading from "expo-app-loading";
+import { useFonts, Lobster_400Regular } from "@expo-google-fonts/lobster";
+import Main from "./src/pages/Main";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Branco } from "./src/styles/cores";
+import Atividades from "./src/contexct";
+import { diaPassados, inicioDia, novaPorcentagem } from "./src/Utils";
 
 export default function App() {
-
-  let mockTarefas = [
-    {
-      desc: "Descricao doida",
-      feito: false,
-      id: "2-Tarefa",
-      nome: 'Segunda Tarefa',
-    },
-    {
-      desc: "",
-      feito: false,
-      id: "1-Tarefa",
-      nome: `${moment(1618781876406).fromNow()}`,
-    },
-  ];
-
-  let mockMetas = [
-    {
-      desc: "",
-      dias: [true, false, true, true, true, true, true],
-      feito: [true, true, false, false, false, false, true, false],
-      total: 8,
-      porcent: 42,
-      id: "4-Meta",
-      nome: "Quarta Meta",
-    },
-    {
-      desc: "Descricao doida",
-      dias: [true, false, false, true, true, true, true],
-      feito: [true, true, true, true, false, false, false, false],
-      total: 8,
-      porcent: 42,
-      id: "3-Meta",
-      nome: "Terceira Meta",
-    },
-    {
-      desc: "Descricao doida",
-      dias: [true, false, true, false, true, true, true],
-      feito: [true, true, true, true, false, false, true, false],
-      total: 8,
-      porcent: 42,
-      id: "2-Meta",
-      nome: "Segunda Meta",
-    },
-    {
-      desc: "",
-      dias: [true, false, true, true, false, true, true],
-      feito: [true, true, true, true, true, true, false, false],
-      total: 8,
-      porcent: 42,
-      id: "1-Meta",
-      nome: "Primeira Meta",
-    },
-  ];
-
-  const [page, setPage] = useState("Home");
   const [tarefas, setTarefas] = useState([]);
   const [metas, setMetas] = useState([]);
+  const [isRead, setIsRead] = useState(false);
+  let [fontsLoaded] = useFonts({ Lobster_400Regular });
 
-  function goHome() {
-    setPage("Home");
+  async function loadData() {
+    const dataTarefasJSON = await AsyncStorage.getItem("@todolist:tarefas");
+    const dataMetasJSON = await AsyncStorage.getItem("@todolist:metas");
+    const ultimoDiaJSON = await AsyncStorage.getItem("@todolist:dia");
+    const dataTarefas = dataTarefasJSON ? JSON.parse(dataTarefasJSON) : [];
+    const dataMetasAnt = dataMetasJSON ? JSON.parse(dataMetasJSON) : [];
+    const dias = ultimoDiaJSON ? diaPassados(JSON.parse(ultimoDiaJSON)) : 0;
+    let dataMetas = [];
+    if (dias > 0) {
+      dataMetas = dataMetasAnt.map((meta) => {
+        for (let i = 0; i < dias; i++) {
+          meta.feito = [...Array(1).fill(false), ...meta.feito].slice(0, 28);
+          meta.porcent = novaPorcentagem(meta.porcent, meta.total, dias);
+          meta.total = meta.total + dias;
+        }
+        return meta;
+      });
+    } else {
+      dataMetas = dataMetasAnt;
+    }
+    setTarefas(dataTarefas);
+    setMetas(dataMetas);
+    try {
+      await AsyncStorage.setItem("@todolist:metas", JSON.stringify(dataMetas));
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Não foi possivel atualizar as Metas");
+    }
+    try {
+      await AsyncStorage.setItem("@todolist:dia", JSON.stringify(inicioDia()));
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Não foi possivel salvar o dia");
+    }
   }
 
-  const paginas = {
-    Home: <Home />,
-    Estatisticas: <Estatisticas />,
-    NovaAtividade: <NovaAtividade />,
-  };
-
-  useEffect(() => {
-    async function loadData(){
-      const dataTarefasKey = '@todolist:tarefas';
-      const dataMetasKey = '@todolist:metas';
-      const dataTarefasJSON = await AsyncStorage.getItem(dataTarefasKey);
-      const dataMetasJSON = await AsyncStorage.getItem(dataMetasKey);
-      const dataTarefas = (dataTarefasJSON ? JSON.parse(dataTarefasJSON) : []);
-      const dataMetas = (dataMetasJSON ? JSON.parse(dataMetasJSON) : []);
-      setTarefas(dataTarefas);
-      setMetas(dataMetas);
-    }
-    loadData();
-  },[])
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
-      <View>
-        <Cabecalho />
-        <Atividades.Provider
-          value={{ tarefas, setTarefas, metas, setMetas, goHome }}
-        >
-          {paginas[page]}
-        </Atividades.Provider>
-        <Navegacao page={page} setPage={setPage} />
-      </View>
-    </SafeAreaView>
-  );
+  if (isRead && fontsLoaded) {
+    return (
+      <Atividades.Provider value={{ tarefas, setTarefas, metas, setMetas }}>
+        <Main />
+      </Atividades.Provider>
+    );
+  } else {
+    return (
+      <AppLoading
+        startAsync={loadData}
+        onFinish={() => setIsRead(true)}
+        onError={console.warn}
+      />
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Branco
-  },
-});

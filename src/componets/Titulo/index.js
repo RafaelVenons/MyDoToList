@@ -1,13 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Branco, Azul_Escuro } from '../../styles/cores';
-import Lobster from '../Lobster';
 
 function Titulo({children}){
     return <>
     <View style={styles.separador}/>
     <View style={styles.containerTexto}>
-        <Lobster style={styles.texto}>{children}</Lobster>
+        <Text style={styles.texto}>{children}</Text>
     </View>
     </>
 };
@@ -28,7 +27,8 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         backgroundColor: Branco,
         fontSize: 24,
-        color: Azul_Escuro
+        color: Azul_Escuro,
+        fontFamily: 'Lobster_400Regular'
     }
 })
 
