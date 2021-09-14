@@ -11,11 +11,10 @@ function Home() {
   const dayWeek = moment().day();
   return (
     <ScrollView style={styles.container}>
-      {tarefas.filter((item) => !item.feito).length !== 0 && (
+      {tarefas.length !== 0 && (
         <Titulo>Tarefas</Titulo>
       )}
       {tarefas
-        .filter((item) => !item.feito)
         .map((item) => (
           <CardTarefa key={item.id} {...item} />
         ))}

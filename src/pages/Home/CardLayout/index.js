@@ -5,12 +5,14 @@ import {
   Branco,
   Laranja,
   Laranja_Claro,
+  Verde_Escuro,
+  Vermelho_Escuro,
 } from "../../../styles/cores";
 import BotaoNotOk from "../BotaoNotOk";
 import BotaoOk from "../BotaoOk";
 import BotaoDelete from "../BotaoDelete";
 
-function CardLayout({ nome, desc, feito, meta, acao, deletar, disabled }) {
+function CardLayout({ nome, desc, feito, meta, acao, deletar, disabled, onLongPress }) {
   const [espandir, setEspandir] = useState(false);
   return (
     <LinearGradient
@@ -21,7 +23,7 @@ function CardLayout({ nome, desc, feito, meta, acao, deletar, disabled }) {
         disabled
           ? [Laranja_Claro, Laranja_Claro]
           : [
-              meta ? (feito ? "#28F700" : "#FD0018") : Laranja_Claro,
+              meta ? (feito ? Verde_Escuro : Vermelho_Escuro) : Laranja_Claro,
               Laranja,
               Laranja,
             ]
@@ -32,6 +34,7 @@ function CardLayout({ nome, desc, feito, meta, acao, deletar, disabled }) {
           style={styles.areaPress}
           activeOpacity={0.5}
           onPress={() => setEspandir(!espandir)}
+          onLongPress={onLongPress}
         >
           <Text style={styles.texto}> {nome} </Text>
         </TouchableOpacity>

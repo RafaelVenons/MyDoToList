@@ -12,6 +12,6 @@ export function atualizaPorcentagem(porcent, total, feito){
     return feito ? (porcent*total + 100)/total : (porcent*total - 100)/total;
 }
 
-export function novaPorcentagem(porcent, total, dias){
-    return porcent*total/(total + dias);
+export function novaPorcentagem(porcent, total){
+    return porcent*total/(total + 1);
 }

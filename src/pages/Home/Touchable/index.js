@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Verde_Escuro, Vermelho_Escuro } from "../../../styles/cores";
 
 function Touchable({ children, disabled }) {
   return (
@@ -13,7 +14,7 @@ function Touchable({ children, disabled }) {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           colors={[
-            meta ? (feito ? "#28F700" : "#FD0018") : Laranja_Claro,
+            meta ? (feito ? Verde_Escuro : Vermelho_Escuro) : Laranja_Claro,
             Laranja,
             Laranja,
           ]}

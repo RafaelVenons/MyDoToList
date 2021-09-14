@@ -3,9 +3,9 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import NotOK from '../../../assets/highlight_off_white_24dp.svg';
 import { Branco, Vermelho } from '../../../styles/cores';
 
-function BotaoNotOk({acao}){
-    return <TouchableOpacity style={styles.container} activeOpacity={0.5} onPress={acao}>
-        <NotOK height='80%' width='80%' />
+function BotaoNotOk({acao, style}){
+    return <TouchableOpacity style={[styles.container,style]} activeOpacity={0.5} onPress={acao}>
+        <NotOK height='80%' width='80%' fill={Branco}/>
     </TouchableOpacity>
 }
 const styles = StyleSheet.create({

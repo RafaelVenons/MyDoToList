@@ -6,7 +6,7 @@ import {
   Branco,
   Vermelho_Claro,
 } from "../../../styles/cores";
-import Botao from "../Botao";
+import Botao from "../../../componets/Botao";
 
 function Frequencia({ style, valido, validacao, dias, setDias }) {
   const styles = dinamicStyles(valido);

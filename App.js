@@ -5,6 +5,7 @@ import Main from "./src/pages/Main";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Atividades from "./src/contexct";
 import { diaPassados, inicioDia, novaPorcentagem } from "./src/Utils";
+import moment from "moment";
 
 export default function App() {
   const [tarefas, setTarefas] = useState([]);
@@ -18,14 +19,18 @@ export default function App() {
     const ultimoDiaJSON = await AsyncStorage.getItem("@todolist:dia");
     const dataTarefas = dataTarefasJSON ? JSON.parse(dataTarefasJSON) : [];
     const dataMetasAnt = dataMetasJSON ? JSON.parse(dataMetasJSON) : [];
-    const dias = ultimoDiaJSON ? diaPassados(JSON.parse(ultimoDiaJSON)) : 0;
+    const ultimoDia = ultimoDiaJSON ? JSON.parse(ultimoDiaJSON) : inicioDia();
+    const dias = diaPassados(ultimoDia);
     let dataMetas = [];
     if (dias > 0) {
       dataMetas = dataMetasAnt.map((meta) => {
-        for (let i = 0; i < dias; i++) {
-          meta.feito = [...Array(1).fill(false), ...meta.feito].slice(0, 28);
-          meta.porcent = novaPorcentagem(meta.porcent, meta.total, dias);
-          meta.total = meta.total + dias;
+        for (let i = 1; i <= dias; i++) {
+          const dayWeek = moment(ultimoDia).add(i, 'days').day();
+          if (meta.dias[dayWeek]) {
+            meta.feito = [false, ...meta.feito].slice(0, 28);
+            meta.porcent = novaPorcentagem(meta.porcent, meta.total);
+            meta.total = meta.total + 1;
+          }
         }
         return meta;
       });

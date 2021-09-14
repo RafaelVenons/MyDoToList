@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
-import { Branco, Verde, Vermelho } from "../../../styles/cores";
+import { Branco, Preto, Verde, Vermelho } from "../../styles/cores";
 
 function Botao({ children, i, dias, setDias }) {
   const styles = dinamicStyles(dias[i]);
@@ -31,7 +31,7 @@ const dinamicStyles = (ativo) =>
       fontSize: 24,
       color: Branco,
       paddingTop: 6,
-      textShadowColor: '#000000',
+      textShadowColor: Preto,
       textShadowRadius: 8,
       fontFamily: 'Lobster_400Regular'
     },

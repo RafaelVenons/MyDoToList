@@ -1,16 +1,14 @@
 import React, { useContext } from "react";
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
 import Atividades from "../../contexct";
-import { inicioDia } from "../../Utils";
 import Item from "./Item";
+import NotFound from "./NotFound";
 
-function Estatisticas() {
-  
-  const teste = `${inicioDia()}`;
+function Estatisticas({goNewTask}) {
   const {metas} = useContext(Atividades);
   return <View>
     <ScrollView style={styles.containerScroll}>
-    {metas.length !== 0 ? metas.map((item) => <Item key={item.id} {...item}/>) : <Text>{teste}</Text>}
+    {metas.length !== 0 ? metas.map((item) => <Item key={item.id} {...item}/>) : <NotFound goNewTask={goNewTask}/>}
     </ScrollView>
   </View>
 }

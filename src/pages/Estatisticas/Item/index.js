@@ -6,10 +6,9 @@ import Grafico from "../Grafico";
 
 function Item({ nome, dias, desc, feito, porcent }) {
   const [espandir, setEspandir] = useState(false);
-  const feitoSemana = feito.slice(0,7);
-  const tamSemana = Math.min(feito.length, dias.reduce((acumulado, item) => item ? acumulado+1 : acumulado));
-  const semanas = Math.ceil(feito.length/7);
-  const tamMes = Math.min(feito.length, semanas*tamSemana);
+  const tam = dias.reduce((acumulado, item) => item ? acumulado+1 : acumulado);
+  const feitoSemana = feito.slice(0,tam);
+  const feitoMes = feito.slice(0,4*tam);
 
   return (
     <>
@@ -20,8 +19,8 @@ function Item({ nome, dias, desc, feito, porcent }) {
       >
         <Titulo>{nome}</Titulo>
         <View style={styles.containerGrafico}>
-          <Grafico feito={feitoSemana} tam={tamSemana} subtitle={"Semana"} />
-          <Grafico feito={feito} tam={tamMes} subtitle={"Mês"} />
+          <Grafico feito={feitoSemana} subtitle={"Semana"} />
+          <Grafico feito={feitoMes} subtitle={"Mês"} />
           <Grafico porcentagem={porcent} subtitle={"Total"} />
         </View>
       </TouchableOpacity>

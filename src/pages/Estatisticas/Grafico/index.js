@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions } from "react-native";
 import { PieChart } from "react-native-chart-kit";
 import { Branco, Verde, Vermelho } from "../../../styles/cores";
 
-function Grafico({ feito, porcentagem, subtitle, tam }) {
+function Grafico({ feito, porcentagem, subtitle }) {
   const largura = Dimensions.get("window").width * 0.3;
   const styles = dinamicStyle(largura);
   const chartConfig = {
@@ -52,8 +52,8 @@ function Grafico({ feito, porcentagem, subtitle, tam }) {
       (acumulado, item) => (item ? acumulado + 1 : acumulado),
       0
     );
-    const notOk = tam - ok > 0 ? tam - ok : 0;
-    const porcent = Math.round((100 * ok) / tam);
+    const notOk = feito.length - ok;
+    const porcent = Math.round((100 * ok) / feito.length);
     const data = [
       {
         name: "Feito",

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import Delete from '../../../assets/delete_forever_white_24dp.svg';
-import { Vermelho } from '../../../styles/cores';
+import { Branco, Vermelho } from '../../../styles/cores';
 
 function BotaoDelete({acao, meta}){
     function notificacao(){
         Alert.alert(
             `Deletar ${meta ? 'Meta' : 'Tarefa'}?`,
-            `Tem certeza que deseja deletar ${meta ? 'Meta' : 'Tarefa'}`,
+            `Tem certeza que deseja deletar a ${meta ? 'Meta' : 'Tarefa'}?`,
             [
               {
                 text: "Cancelar",
@@ -21,7 +21,7 @@ function BotaoDelete({acao, meta}){
           );
     }
     return <TouchableOpacity style={styles.container} activeOpacity={0.5} onPress={notificacao}>
-        <Delete height='80%' width='80%'/>
+        <Delete height='80%' width='80%' fill={Branco}/>
     </TouchableOpacity>
 }
 const styles = StyleSheet.create({

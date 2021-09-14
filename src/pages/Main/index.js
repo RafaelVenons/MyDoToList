@@ -16,20 +16,22 @@ function Main() {
     setPage("Home");
   }
 
+  function goNewTask() {
+    setPage("NovaAtividade");
+  }
+
   const paginas = {
     Home: <Home />,
-    Estatisticas: <Estatisticas />,
+    Estatisticas: <Estatisticas goNewTask={goNewTask}/>,
     NovaAtividade: <NovaAtividade goHome={goHome}/>,
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      <View>
         <Cabecalho />
           {paginas[page]}
         <Navegacao page={page} setPage={setPage} />
-      </View>
     </SafeAreaView>
   );
 }
